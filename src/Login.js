@@ -55,6 +55,12 @@ const useStyles = makeStyles((theme) => ({
         position: "absolute",
         top: "8%",
         fontSize: "11px"
+    },
+    absolute2: {
+        position: "absolute",
+        top: "8%",
+        fontSize: "11px",
+        left: "80%"
     }
 }));
 function Login() {
@@ -129,6 +135,7 @@ function Login() {
                         Sign Up
                     </Button>
                 </DialogActions>
+
             </Dialog>
             <Box display="flex"
                 justifyContent="center"
@@ -146,6 +153,7 @@ function Login() {
                             <Grid className={classes.centerGrid} container alignItems="center" >
 
                                 <Grid className={classes.absolute}><Typography variant="h5">Flipr Hackathon 9.0</Typography></Grid>
+                                <Grid className={classes.absolute2}><Typography variant="h5"> <Button>Login</Button> </Typography></Grid>
                                 <Typography variant="h3">MailChimp</Typography>
                                 <Typography className={classes.wrap} variant="h4">Build your brand, sell online! All with MailChimp</Typography>
                                 <Typography className={classes.wrap} variant="h5">Our marketing and commerce tools work together to help
