@@ -8,7 +8,7 @@ import rootReducer from '../index'
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ['user'], // only user will be persisted
+    whitelist: ['user'],
 }
 
 reduxModule.__DO_NOT_USE__ActionTypes.REPLACE = '@@redux/INIT'
@@ -18,11 +18,9 @@ const composeEnhancers =
         typeof window === 'object' &&
         window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
         ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
-            // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...
         })
         : compose
 
-//Custom Logger For Redux action & dispatch
 const logger = (store) => (next) => (action) => {
     let result = next(action)
     console.log('next state', store.getState())

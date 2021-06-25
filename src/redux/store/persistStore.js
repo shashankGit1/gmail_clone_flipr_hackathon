@@ -5,26 +5,19 @@ import thunk from "redux-thunk";
 const LOCAL_STORAGE_NAME = "localData";
 
 class PersistedStore {
-    // Singleton property
     static DefaultStore = null;
-
-    // Accessor to the default instance of this class
     static getDefaultStore() {
         if (PersistedStore.DefaultStore === null) {
             PersistedStore.DefaultStore = new PersistedStore();
         }
         return PersistedStore.DefaultStore;
     }
-
-    // Redux store
     _store = null;
 
-    // When class instance is used, initialize the store
     constructor() {
         this.initStore();
     }
 
-    // Initialization of Redux Store
     initStore() {
         this._store = createStore(
             rootReducer,
@@ -35,14 +28,9 @@ class PersistedStore {
             PersistedStore.saveState(this._store.getState());
         });
     }
-
-    // Getter to access the Redux store
     get store() {
         return this._store;
     }
-
-    // Loading persisted state from localStorage, no need to access
-    // this method from the outside
     static loadState() {
         try {
             let serializedState = localStorage.getItem(LOCAL_STORAGE_NAME);
@@ -56,10 +44,6 @@ class PersistedStore {
             return PersistedStore.initialState();
         }
     }
-
-    // Saving persisted state to localStorage every time something
-    // changes in the Redux Store (This happens because of the subscribe()
-    // in the initStore-method). No need to access this method from the outside
     static saveState(state) {
         console.log(state)
         try {
@@ -70,7 +54,6 @@ class PersistedStore {
         }
     }
 
-    // Return whatever you want your initial state to be
     static initialState() {
         return {};
     }
