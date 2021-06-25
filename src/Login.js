@@ -89,6 +89,7 @@ function Login() {
     }
     const signUpwithUsernamePassword = () => {
         dispatch(signUp(username, password))
+        setOpen(false);
     }
 
 
