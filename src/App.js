@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react'
 import Login from './Login'
-import Authorized from './Authorized'
+import Authorized from './Components/Authorized'
 import { useSelector } from 'react-redux'
 function App() {
   const appAuth = useSelector(({ auth }) => auth)
-
 
 
   useEffect(() => {
@@ -14,6 +13,7 @@ function App() {
   return !appAuth.status ? <Login /> : (
     <div>
       <Authorized />
+
     </div>
   )
 }

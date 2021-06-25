@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
+import Header from './Header'
 function Authorized() {
     const appAuth = useSelector(({ app }) => app)
     useEffect(() => {
@@ -8,8 +9,7 @@ function Authorized() {
 
     return (
         <div>
-            USER HAS SUCCESSFULLY LOGGED IN
-
+            <Header/>
         </div>
     )
 }
