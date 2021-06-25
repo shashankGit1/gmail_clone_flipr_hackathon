@@ -62,12 +62,12 @@ function Login() {
     const signIn = () => {
         dispatch(signInWithGoogle())
     }
-    const signUpwithUsernamePassword = () => {
-        dispatch(signUp('shashank3@gmail.com', 'iamGood'))
-    }
+
     const classes = useStyles();
     let history = useHistory()
     const [open, setOpen] = React.useState(false);
+    const [username, setUsername] = React.useState('')
+    const [password, setPassword] = React.useState('')
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -76,6 +76,21 @@ function Login() {
     const handleClose = () => {
         setOpen(false);
     };
+    const onUsernameChange = (event) => {
+        console.log(event.target.value)
+        setUsername(event.target.value + "@gmail.com")
+
+    }
+    const onPasswordChange = (event) => {
+        console.log(event.target.value)
+        setPassword(event.target.value)
+
+
+    }
+    const signUpwithUsernamePassword = () => {
+        dispatch(signUp(username, password))
+    }
+
 
     return (
         <div>
@@ -91,6 +106,7 @@ function Login() {
                         id="name"
                         label="Username"
                         type="username"
+                        onChange={onUsernameChange}
                         fullWidth
                     />
                     <TextField
@@ -99,6 +115,8 @@ function Login() {
                         id="name"
                         label="Password"
                         type="password"
+                        onChange={onPasswordChange}
+
                         fullWidth
                     />
                 </DialogContent>
