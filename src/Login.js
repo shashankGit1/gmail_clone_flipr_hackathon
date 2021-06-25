@@ -62,7 +62,7 @@ function Login() {
     const signIn = () => {
         dispatch(signInWithGoogle())
     }
-    const signUpwith = () => {
+    const signUpwithUsernamePassword = () => {
         dispatch(signUp('shashank3@gmail.com', 'iamGood'))
     }
     const classes = useStyles();
@@ -80,18 +80,25 @@ function Login() {
     return (
         <div>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-                <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+                <DialogTitle id="form-dialog-title">Sign Up</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        To subscribe to this website, please enter your email address here. We will send updates
-                        occasionally.
+                        Flipr Hackathon 9.0
                     </DialogContentText>
                     <TextField
                         autoFocus
                         margin="dense"
                         id="name"
-                        label="Email Address"
-                        type="email"
+                        label="Username"
+                        type="username"
+                        fullWidth
+                    />
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="name"
+                        label="Password"
+                        type="password"
                         fullWidth
                     />
                 </DialogContent>
@@ -99,8 +106,8 @@ function Login() {
                     <Button onClick={handleClose} color="primary">
                         Cancel
                     </Button>
-                    <Button onClick={handleClose} color="primary">
-                        Subscribe
+                    <Button onClick={signUpwithUsernamePassword} color="primary">
+                        Sign Up
                     </Button>
                 </DialogActions>
             </Dialog>
