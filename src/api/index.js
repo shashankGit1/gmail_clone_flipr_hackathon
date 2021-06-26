@@ -13,12 +13,13 @@ export const signInGoogle = () => {
 
 export const signUp = (email, password) => {
     return new Promise((resolve, reject) => {
-        auth.createUserWithEmailAndPassword(email, password).then((res) => {
-            console.log(res)
-            resolve(res)
-        }).catch((err) => {
-            console.log(err)
-            reject(err)
-        })
+        auth.createUserWithEmailAndPassword(email, password)
+            .then((res) => {
+                console.log(res)
+                resolve(res)
+            }).catch((err) => {
+                console.log(err)
+                reject(err)
+            })
     })
 }

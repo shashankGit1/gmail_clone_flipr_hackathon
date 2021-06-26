@@ -153,7 +153,7 @@ function Login() {
                             <Grid className={classes.centerGrid} container alignItems="center" >
 
                                 <Grid className={classes.absolute}><Typography variant="h5">Flipr Hackathon 9.0</Typography></Grid>
-                                <Grid className={classes.absolute2}><Typography variant="h5"> <Button>Login</Button> </Typography></Grid>
+                                <Grid className={classes.absolute2}><Typography variant="h5"> <Button color="secondary" variant="contained">Login</Button> </Typography></Grid>
                                 <Typography variant="h3">MailChimp</Typography>
                                 <Typography className={classes.wrap} variant="h4">Build your brand, sell online! All with MailChimp</Typography>
                                 <Typography className={classes.wrap} variant="h5">Our marketing and commerce tools work together to help

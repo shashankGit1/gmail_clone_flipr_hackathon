@@ -21,6 +21,12 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import Header from './Header'
+import Sidebar from './Sidebar'
+import { useDispatch, } from 'react-redux'
+import { scheduledDataHandler } from './redux/actions/actions';
+import SidebarComponent from './SidebarComponent';
+let historyConst = []
 function Authorized() {
 
     const API = 'http://localhost:8080/api/v1/data'
@@ -34,9 +40,12 @@ function Authorized() {
     const [emails, setEmails] = React.useState([])
     const [open, setOpen] = React.useState(false);
     const [open2, setOpen2] = React.useState(false);
+    const [open3, setOpen3] = React.useState(false);
     const [scheduledDate, setSheduledDate] = React.useState(0)
     const [currentDate, setCurrentDate] = React.useState(Date.now())
     const [mailToBeSent, setMailToBeSent] = React.useState(false)
+    const [history, setHistory] = React.useState([])
+
 
     const fetchData = () => {
         axios.get('http://localhost:8080/api/v1/emails').then((res) => {
@@ -95,6 +104,15 @@ function Authorized() {
     const handleClose2 = () => {
         setOpen2(false);
     };
+    const handleClickOpen3 = () => {
+        setOpen3(true);
+    };
+
+    const handleClose3 = () => {
+        setOpen3(false);
+    };
+    const appAuth = useSelector(({ auth }) => auth)
+
     const datePickerHandler = (e) => {
         console.log("Selected Date", e.target.valueAsNumber)
         console.log("Current Date", Date.now())
@@ -112,14 +130,37 @@ function Authorized() {
     const dateChecker = () => {
 
     }
+    const dispatch = useDispatch()
 
     const dateCheckerSch = () => {
+        historyConst.push({
+            to: to,
+            from: 'itzmepratyush@gmail.com',
+            subject: subject,
+            text: text,
+            date: scheduledDate
+        })
+        console.log(historyConst)
         setOpen2(false);
+        dispatch(scheduledDataHandler(historyConst))
 
         const interval = setInterval(() => {
             if (Date.now() > scheduledDate) {
                 console.log("Sending Mail")
                 console.log("Mail Sent")
+
+                // api call
+                axios.post(API, {
+                    to: to,
+                    from: 'itzmepratyush@gmail.com',
+                    subject: subject,
+                    text: text
+                }).then((res) => {
+                    console.log(res)
+                })
+
+
+
                 clearInterval(interval)
             }
             else {
@@ -132,7 +173,55 @@ function Authorized() {
     }
 
     return (
-        <div className='App'>
+        <div className='App authorized'>
+            <Header />
+            {/* <Sidebar /> */}
+            <div >
+                {/* <Button>On Compose</Button> */}
+                <Button onClick={handleClickOpen} >History</Button>
+                <Button onClick={handleClickOpen3} >Compose</Button>
+            </div>
+
+            <Grid container >
+                {/* <Sidebar /> */}
+
+                <div className="emailsHistory scheduledTable">
+                    <Table border="0" cellSpacing="3">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell class="tg-0lax"> <Typography variant="h7">Sl No.</Typography></TableCell>
+                                <TableCell class="tg-0lax"><Typography variant="h7">To</Typography></TableCell>
+                                <TableCell class="tg-0lax"><Typography variant="h7">From</Typography></TableCell>
+                                <TableCell class="tg-0lax"><Typography variant="h7">Subject</Typography></TableCell>
+                                <TableCell class="tg-0lax"><Typography variant="h7">Message</Typography></TableCell>
+                                <TableCell class="tg-0lax"><Typography variant="h7">Date</Typography></TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {
+                                appAuth.scheduledData.map((data, num) => (
+                                    <TableRow>
+                                        <TableCell >{num + 1}</TableCell>
+                                        <TableCell >{data.to}</TableCell>
+                                        <TableCell >{data.from}</TableCell>
+                                        <TableCell >{data.subject}</TableCell>
+                                        <TableCell >{data.text}</TableCell>
+                                        <TableCell >{new Date(data.date).toDateString()}</TableCell>
+                                        {/* <td> <DeleteIcon /></td> */}
+                                    </TableRow>
+
+                                ))
+                            }
+
+
+                        </TableBody>
+                    </Table>
+
+
+                </div>
+            </Grid>
+
+            {/* <Sidebar history={emails} /> */}
             <Dialog
                 className="dialogBoxAuth"
                 open={open}
@@ -192,78 +281,97 @@ function Authorized() {
                     </Button>
                 </DialogActions>
             </Dialog>
-            <Dialog open={open2} onClose={handleClose2} aria-labelledby="form-dialog-title">
-                <DialogTitle id="form-dialog-title">Schedule a Mail</DialogTitle>
+
+
+            <div className="special">
+                <Dialog fullWidth='lg' maxWidth='lg' className="composeDialg" open={open2} onClose={handleClose2} aria-labelledby="form-dialog-title">
+                    <DialogTitle id="form-dialog-title">Schedule a Mail</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            Schedule a Mail by selecting the date and time and we will automatically send it!
+                        </DialogContentText>
+                        <TextField
+                            onChange={datePickerHandler}
+                            id="datetime-local"
+                            label="Next appointment"
+                            type="datetime-local"
+                            defaultValue="2021-06-26T10:30"
+
+
+                        />
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleClose2} color="primary">
+                            Cancel
+                        </Button>
+                        <Button onClick={dateCheckerSch} color="primary">
+                            Schedule
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+            </div>
+
+
+
+            <Dialog open={open3} onClose={handleClose3} aria-labelledby="form-dialog-title">
+                <DialogTitle id="form-dialog-title">Compose</DialogTitle>
                 <DialogContent>
-                    <DialogContentText>
-                        Schedule a Mail by selecting the date and time and we will automatically send it!
-                    </DialogContentText>
-                    <TextField
-                        onChange={datePickerHandler}
-                        id="datetime-local"
-                        label="Next appointment"
-                        type="datetime-local"
-                        defaultValue="2021-06-26T10:30"
+                    <Grid id="datagrid" className="gridParent" >
+                        <Paper className="textGrid" container >
+                            <Typography className="space-below" variant="h6">Send a Mail</Typography>
+
+                            <TextField
+                                autoFocus
+                                margin="dense"
+                                id="name"
+                                label="To"
+                                type="text"
+                                onChange={toHandler}
+                                fullWidth
+                                variant="outlined"
+                            />
+                            <TextField
+                                autoFocus
+                                margin="dense"
+                                id="name"
+                                label="Subject"
+                                type="text"
+                                onChange={subjectHandler}
+                                fullWidth
+                                variant="outlined"
+                            />
+                            <TextField
+                                autoFocus
+                                margin="dense"
+                                id="name"
+
+                                className="messageInput"
+                                label="Message"
+                                type="text"
+                                onChange={textHandler}
+                                fullWidth
+                                variant="outlined"
+                            />
+
+                            <Grid className="flex-end" > <Button className="space" color="primary" variant="outlined" onClick={fetchData} >Send Mail</Button>
+                                <Button color="primary" variant="outlined" onClick={handleClickOpen2} >Schedule a Mail</Button>
+                            </Grid>
+                        </Paper>
 
 
-                    />
+
+                    </Grid>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose2} color="primary">
+                    <Button onClick={handleClose3} color="primary">
                         Cancel
                     </Button>
-                    <Button onClick={dateCheckerSch} color="primary">
-                        Schedule
-                    </Button>
+
                 </DialogActions>
             </Dialog>
-
-            <Button className="historyButton" color="primary" variant="outlined" onClick={handleClickOpen} >Show History</Button>
-            <Grid className="gridParent" >
-                <Paper className="textGrid" container >
-                    <Typography className="space-below" variant="h6">Send a Mail</Typography>
-
-                    <TextField
-                        autoFocus
-                        margin="dense"
-                        id="name"
-                        label="To"
-                        type="text"
-                        onChange={toHandler}
-                        fullWidth
-                        variant="outlined"
-                    />
-                    <TextField
-                        autoFocus
-                        margin="dense"
-                        id="name"
-                        label="Subject"
-                        type="text"
-                        onChange={subjectHandler}
-                        fullWidth
-                        variant="outlined"
-                    />
-                    <TextField
-                        autoFocus
-                        margin="dense"
-                        id="name"
-
-                        className="messageInput"
-                        label="Message"
-                        type="text"
-                        onChange={textHandler}
-                        fullWidth
-                        variant="outlined"
-                    />
-
-                    <Grid className="flex-end" > <Button className="space" color="primary" variant="outlined" onClick={fetchData} >Send Mail</Button>
-                        <Button color="primary" variant="outlined" onClick={handleClickOpen2} >Schedule a Mail</Button>
-                    </Grid>
-                </Paper>
+            {/* <Button className="historyButton" color="primary" variant="outlined" onClick={handleClickOpen} >Show History</Button> */}
 
 
-
-            </Grid>
 
 
         </div>

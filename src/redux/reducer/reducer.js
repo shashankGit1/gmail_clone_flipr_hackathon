@@ -5,7 +5,8 @@ const initialState = {
     status: false,
     error: false,
     message: '',
-    userSignUpData: []
+    userSignUpData: [],
+    scheduledData: []
 }
 
 
@@ -60,6 +61,14 @@ export default function authReducer(state = initialState, action) {
                 status: false,
                 error: true,
                 message: action.payload,
+            }
+        case AuthActions.SCHEDULE_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                status: true,
+                error: false,
+                scheduledData: action.payload,
             }
         default:
             return state

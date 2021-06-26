@@ -43,13 +43,13 @@ td {
 }
 .gridParent {
   display: flex;
-  justify-content: space-around;
-  align-items: center;
-  flex-direction: column;
+  /* border: 2px solid red; */
+  width: 1210px;
 }
-.MuiDialog-paperWidthSm {
-  max-width: 809px;
+.gridParent .MuiDialogTitle-root {
+  width: 1210px;
 }
+
 ::-webkit-scrollbar {
   display: none;
 }
@@ -77,4 +77,9 @@ td {
 }
 .space {
   margin-right: 1.5% !important;
+}
+.scheduledTable {
+  width: 50%;
+  margin: auto;
+  padding-top: 3%;
 }
