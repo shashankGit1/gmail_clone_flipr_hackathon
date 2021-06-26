@@ -2,6 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { signInWithGoogle } from './redux/actions/actions'
 import { signUp } from './redux/actions/actions'
+import {login} from './redux/actions/actions'
 import Typography from '@material-ui/core/Typography';
 import { Box, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -72,15 +73,20 @@ function Login() {
     const classes = useStyles();
     let history = useHistory()
     const [open, setOpen] = React.useState(false);
+    const [openLogin,setOpenLogin]=React.useState(false)
     const [username, setUsername] = React.useState('')
     const [password, setPassword] = React.useState('')
 
     const handleClickOpen = () => {
         setOpen(true);
     };
+    const handleClickOpenLogin = () => {
+        setOpenLogin(true);
+    };
 
     const handleClose = () => {
         setOpen(false);
+        setOpenLogin(false);
     };
     const onUsernameChange = (event) => {
         console.log(event.target.value)
@@ -96,6 +102,11 @@ function Login() {
     const signUpwithUsernamePassword = () => {
         dispatch(signUp(username, password))
         setOpen(false);
+    }
+    const loginwithusername=(event)=>{
+        console.log("Debug : ",username)
+        dispatch(login(username,password))
+        setOpenLogin(false);
     }
 
 
@@ -137,6 +148,43 @@ function Login() {
                 </DialogActions>
 
             </Dialog>
+            <Dialog open={openLogin} onClose={handleClose} aria-labelledby="login-dialog-title">
+                <DialogTitle id="form-dialog-title"> Login</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>
+                        Flipr Hackathon 9.0
+                    </DialogContentText>
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="name"
+                        label="Username"
+                        type="username"
+                        onChange={onUsernameChange}
+                        fullWidth
+                    />
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="name"
+                        label="Password"
+                        type="password"
+                        onChange={onPasswordChange}
+
+                        fullWidth
+                    />
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleClose} color="primary">
+                        Cancel
+                    </Button>
+                    <Button onClick={loginwithusername} color="primary">
+                        login
+                    </Button>
+                </DialogActions>
+
+
+            </Dialog>
             <Box display="flex"
                 justifyContent="center"
                 alignItems="center"
@@ -153,7 +201,7 @@ function Login() {
                             <Grid className={classes.centerGrid} container alignItems="center" >
 
                                 <Grid className={classes.absolute}><Typography variant="h5">Flipr Hackathon 9.0</Typography></Grid>
-                                <Grid className={classes.absolute2}><Typography variant="h5"> <Button color="secondary" variant="contained">Login</Button> </Typography></Grid>
+                                <Grid className={classes.absolute2}><Typography variant="h5"> <Button onClick={handleClickOpenLogin} className={classes.buttons} >Login</Button> </Typography></Grid>
                                 <Typography variant="h3">MailChimp</Typography>
                                 <Typography className={classes.wrap} variant="h4">Build your brand, sell online! All with MailChimp</Typography>
                                 <Typography className={classes.wrap} variant="h5">Our marketing and commerce tools work together to help
