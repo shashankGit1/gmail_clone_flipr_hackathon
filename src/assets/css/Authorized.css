@@ -83,3 +83,7 @@ td {
   margin: auto;
   padding-top: 3%;
 }
+
+.MuiDialog-paperWidthSm {
+  max-width: 1200px  !important; 
+}

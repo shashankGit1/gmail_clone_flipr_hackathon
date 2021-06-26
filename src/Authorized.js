@@ -59,7 +59,7 @@ function Authorized() {
         console.log(text)
         axios.post(API, {
             to: to,
-            from: 'itzmepratyush@gmail.com',
+            from: 'shashankthakur232@gmail.com',
             subject: subject,
             text: text
         }).then((res) => {
@@ -159,8 +159,6 @@ function Authorized() {
                     console.log(res)
                 })
 
-
-
                 clearInterval(interval)
             }
             else {
@@ -187,6 +185,7 @@ function Authorized() {
 
                 <div className="emailsHistory scheduledTable">
                     <Table border="0" cellSpacing="3">
+
                         <TableHead>
                             <TableRow>
                                 <TableCell class="tg-0lax"> <Typography variant="h7">Sl No.</Typography></TableCell>
@@ -195,6 +194,9 @@ function Authorized() {
                                 <TableCell class="tg-0lax"><Typography variant="h7">Subject</Typography></TableCell>
                                 <TableCell class="tg-0lax"><Typography variant="h7">Message</Typography></TableCell>
                                 <TableCell class="tg-0lax"><Typography variant="h7">Date</Typography></TableCell>
+                            
+                                
+
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -244,6 +246,8 @@ function Authorized() {
                                                     <TableCell class="tg-0lax"><Typography variant="h7">From</Typography></TableCell>
                                                     <TableCell class="tg-0lax"><Typography variant="h7">Subject</Typography></TableCell>
                                                     <TableCell class="tg-0lax"><Typography variant="h7">Message</Typography></TableCell>
+                                                    <TableCell class="tg-0lax"><Typography variant="h7">Date</Typography></TableCell>
+                                
                                                 </TableRow>
                                             </TableHead>
                                             <TableBody>
@@ -255,6 +259,8 @@ function Authorized() {
                                                             <TableCell >{data.from}</TableCell>
                                                             <TableCell >{data.subject}</TableCell>
                                                             <TableCell >{data.text}</TableCell>
+                                                            <TableCell >{data.endTime}</TableCell>
+                                                            
                                                             {/* <td> <DeleteIcon /></td> */}
                                                         </TableRow>
 
