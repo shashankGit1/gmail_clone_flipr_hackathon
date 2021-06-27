@@ -45,25 +45,33 @@ function Authorized() {
     const [history, setHistory] = React.useState([])
 
 
-    const fetchData = () => {
-        axios.get('https://flipr-hackathon-gmail-backend.herokuapp.com/api/v1/emails').then((res) => {
-            console.log(res.data)
-            setEmails(res.data)
-        }).catch((err) => {
-            console.log(err)
-        })
-        console.log(to)
-        console.log(subject)
-        console.log(text)
-        axios.post(API, {
-            to: to,
-            from: 'shashankthakur232@gmail.com',
-            subject: subject,
-            text: text
-        }).then((res) => {
-            console.log(res)
-        })
-
+    const fetchData = () => 
+    {
+        if(to!=='')
+        {        
+            axios.get('https://flipr-hackathon-gmail-backend.herokuapp.com/api/v1/emails').then((res) => {
+                console.log(res.data)
+                setEmails(res.data)
+            }).catch((err) => {
+                console.log(err)
+            })
+        
+            console.log(to)
+            console.log(subject)
+            console.log(text)
+            axios.post(API, {
+                to: to,
+                from: 'shashankthakur232@gmail.com',
+                subject: subject,
+                text: text
+            }).then((res) => {
+                alert("Mail Sent")
+                console.log(res)
+            })
+        }
+        else{
+            alert("Mail Not Sent")
+        }
     }
 
     const toHandler = (e) => {
@@ -138,14 +146,15 @@ function Authorized() {
             text: text,
             date: scheduledDate
         })
+        alert('Mail Scheduled!')
         console.log(historyConst)
         setOpen2(false);
         dispatch(scheduledDataHandler(historyConst))
 
         const interval = setInterval(() => {
             if (Date.now() > scheduledDate) {
-                console.log("Sending Mail")
-                console.log("Mail Sent")
+                alert("Sending Mail")
+                alert("Mail Sent")
 
                 // api call
                 axios.post(API, {
@@ -342,11 +351,11 @@ function Authorized() {
                                 fullWidth
                                 variant="outlined"
                             />
-                            <TextField
+                            <textarea
                                 autoFocus
                                 margin="dense"
                                 id="name"
-
+                                
                                 className="messageInput"
                                 label="Message"
                                 type="text"
