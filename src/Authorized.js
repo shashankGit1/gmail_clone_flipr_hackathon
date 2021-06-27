@@ -13,8 +13,6 @@ import TextField from '@material-ui/core/TextField';
 import { Box, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-// import React from 'react';
-// import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -29,7 +27,7 @@ import SidebarComponent from './SidebarComponent';
 let historyConst = []
 function Authorized() {
 
-    const API = 'http://localhost:8080/api/v1/data'
+    const API = 'https://flipr-hackathon-gmail-backend.herokuapp.com/api/v1/data'
     const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
     const handleDateChange = (date) => {
         setSelectedDate(date);
@@ -48,7 +46,7 @@ function Authorized() {
 
 
     const fetchData = () => {
-        axios.get('http://localhost:8080/api/v1/emails').then((res) => {
+        axios.get('https://flipr-hackathon-gmail-backend.herokuapp.com/api/v1/emails').then((res) => {
             console.log(res.data)
             setEmails(res.data)
         }).catch((err) => {
@@ -81,7 +79,7 @@ function Authorized() {
 
     }
     const handleClickOpen = () => {
-        axios.get('http://localhost:8080/api/v1/emails').then((res) => {
+        axios.get('https://flipr-hackathon-gmail-backend.herokuapp.com/api/v1/emails').then((res) => {
             console.log(res.data)
             setEmails(res.data)
             setOpen(true);
@@ -135,7 +133,7 @@ function Authorized() {
     const dateCheckerSch = () => {
         historyConst.push({
             to: to,
-            from: 'itzmepratyush@gmail.com',
+            from: 'shashankthakur232@gmail.com',
             subject: subject,
             text: text,
             date: scheduledDate
@@ -152,7 +150,7 @@ function Authorized() {
                 // api call
                 axios.post(API, {
                     to: to,
-                    from: 'itzmepratyush@gmail.com',
+                    from: 'shashankthakur232@gmail.com',
                     subject: subject,
                     text: text
                 }).then((res) => {
@@ -194,8 +192,6 @@ function Authorized() {
                                 <TableCell class="tg-0lax"><Typography variant="h7">Subject</Typography></TableCell>
                                 <TableCell class="tg-0lax"><Typography variant="h7">Message</Typography></TableCell>
                                 <TableCell class="tg-0lax"><Typography variant="h7">Date</Typography></TableCell>
-                            
-                                
 
                             </TableRow>
                         </TableHead>
@@ -291,7 +287,7 @@ function Authorized() {
 
             <div className="special">
                 <Dialog fullWidth='lg' maxWidth='lg' className="composeDialg" open={open2} onClose={handleClose2} aria-labelledby="form-dialog-title">
-                    <DialogTitle id="form-dialog-title">Schedule a Mail</DialogTitle>
+                    <DialogTitle id="form-dialog-title"></DialogTitle>
                     <DialogContent>
                         <DialogContentText>
                             Schedule a Mail by selecting the date and time and we will automatically send it!
@@ -324,7 +320,7 @@ function Authorized() {
                 <DialogContent>
                     <Grid id="datagrid" className="gridParent" >
                         <Paper className="textGrid" container >
-                            <Typography className="space-below" variant="h6">Send a Mail</Typography>
+                            <Typography className="space-below" variant="h6"></Typography>
 
                             <TextField
                                 autoFocus
