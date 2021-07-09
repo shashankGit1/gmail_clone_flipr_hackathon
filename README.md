@@ -2,6 +2,9 @@ DESCRIPTION  DOCUMENT
 
 https://hackathon-kiit.web.app/
 
+Description document link, whose text has been copied below.
+https://docs.google.com/document/d/135ti38SCYINYoza33lor-v5Iin8Dz07V7Vj-4v8FQ6w/edit#
+
 Table of Contents
 
 Project Title:	1
