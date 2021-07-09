@@ -1,70 +1,95 @@
-# Getting Started with Create React App
+DESCRIPTION  DOCUMENT
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+https://hackathon-kiit.web.app/
 
-## Available Scripts
+Table of Contents
 
-In the project directory, you can run:
+Project Title:	1
+Overview:	1
+Features:	2
+Technology Stack Used:	2
+Functional Description of the Project:	2
+Implementation Description of the Project:	3
 
-### `yarn start`
+Project Title:
+	Email Scheduler WebApp
+Overview:
+	A full stack web application where users can 
+Login /SignUp
+Send Emails
+View History
+Schedule an email for future
+View all scheduled mails
+Features:
+Authentication:
+	For new users:
+Sign In with Google
+Sign in with username and Password
+	For existing users
+Login 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Compose Button to compose a new email
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Schedule Button to schedule emails for future
 
-### `yarn test`
+History Button that displays all past emails with Date of Sending
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `yarn build`
+Technology Stack Used:
+Frontend:
+HTML
+CSS
+JavaScript (React.js)
+Redux with  Persist Store
+Firebase (Deployment Environment)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Backend:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+MongoDB (Database)
+Express (Connection)
+SendGrid (Email service)
+Heroku (Deployment Environment)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Functional Description of the Project:
 
-### `yarn eject`
+The first step is authorization. We provide three options for authentication to the user-
+	For new users:
+Google Account Authentication
+Email Password Authentication
+	For Existing Users:
+Login using Email and Password
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+After authentication, the user lands on the home page, which displays a table of all scheduled emails for the future.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The home has two more buttons- 
+Compose: On clicking the compose button, the send email dialog box appears where the user can enter the email address to which he has to send the mail, enter the subject and the email body.
+The user can now choose between 
+Sending an email to the recipient right now, or
+Scheduling the email for future 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Once the user selects any of the options, the dialog box exits.
+If the user clicks on send mail, the email is sent and the sent email details and contents is pushed to the history tab, which the user can view on clicking the History Button on the homepage.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+If the user clicks on schedule mail, the sending of the email is scheduled to the date and time as selected by the user and the details of the email are saved in the Schedule Mail list which is displayed on the homepage.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Implementation Description of the Project:
+Firebase Authentication Services are used for User Signups and Logins.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+MaterialUI was used to implement the UI at several instances in the project.
 
-### Code Splitting
+ReactJS was used as a framework for the project. 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+The email sending service was implemented using SendGrid Email Delivery Service
 
-### Analyzing the Bundle Size
+MongoDB was used for database requirements, such as, storing all sent and scheduled emails.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Redux was used to globally store the user authentication data for Google Signup, user scheduled emails and Firebase login and signup. 
 
-### Making a Progressive Web App
+Heroku was used for deployment of the web application.
+Express was used to handle GET and POST requests.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+ 
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
